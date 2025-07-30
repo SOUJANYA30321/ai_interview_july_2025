@@ -9,7 +9,7 @@ import {getFeedbackByInterviewId} from "@/lib/actions/general.action";
 
 const InterviewCard = async({ id, userId, role, type, techstack, createdAt }: InterviewCardProps) => {
     const feedback = userId && id
-    ? await getFeedbackByInterviewId({ interviewId: id, userId})
+        ? await getFeedbackByInterviewId({interviewId: id, userId})
         : null;
     const normalizedType = /mix/gi.test(type) ? 'Mixed' : type;
     const formattedDate = dayjs(feedback?.createdAt || createdAt || Date.now()).format('MMM D, YYYY');
@@ -21,13 +21,14 @@ const InterviewCard = async({ id, userId, role, type, techstack, createdAt }: In
                     <div className="absolute top-0 right-0 w-fit px-4 py-2 rounded-bl-lg bg-light-600">
                         <p className="badge-text">{normalizedType}</p>
                     </div>
-                    <Image src={getRandomInterviewCover()} alt="cover image" width={90} height={90} className="rounded-full object-fit size-[90px]"/>
+                    <Image src={getRandomInterviewCover()} alt="cover image" width={90} height={90}
+                           className="rounded-full object-fit size-[90px]"/>
                     <h3 className="mt-5 capitalize">
                         {role} Interview
                     </h3>
                     <div className="flex flex-row gap-5 mt-3">
                         <div className="flex flex-row gap-2">
-                            <Image src="/calendar.svg" alt="calendar" width={22} height={22} />
+                            <Image src="/calendar.svg" alt="calendar" width={22} height={22}/>
                             <p>{formattedDate}</p>
                         </div>
                         <div className="flex flex-row gap-2 items-center">
@@ -39,19 +40,19 @@ const InterviewCard = async({ id, userId, role, type, techstack, createdAt }: In
                         {feedback?.finalAssessment || "You haven't taken the interview yet. Take it now to improve your skills."}
                     </p>
                 </div>
-                    <div className="flex flex-row justify-between">
-                        <DisplayTechIcons techStack={techstack} />
-                        <Button className="btn-primary">
-                            <Link href={feedback
-                                ? `/interview/${id}/feedback`
-                                : `/interview/${id}`
-                            }>
-                                {feedback ? 'Check Feedback' : 'View Interview'}
-                            </Link>
-                        </Button>
-                    </div>
+                <div className="flex flex-row justify-between">
+                    <DisplayTechIcons techStack={techstack}/>
+                    <Button className="btn-primary">
+                        <Link href={feedback
+                            ? /interview/${id}/feedback
+                            : /interview/${id}
+                        }>
+                            {feedback ? 'Check Feedback' : 'View Interview'}
+                        </Link>
+                    </Button>
+                </div>
             </div>
         </div>
     )
 }
-export default InterviewCard
+export default InterviewCard;
